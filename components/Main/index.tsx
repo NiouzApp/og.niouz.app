@@ -5,9 +5,7 @@ import { TextInput } from './TextInput';
 import { ThemeComboBox } from './ThemeComboBox';
 
 export function Main() {
-  const BASE_PATH = 'http://localhost:3003' //'https://og.niouz.app';
-  const BASE_IMAGE_API_URL = BASE_PATH + '/api';
-
+  const BASE_IMAGE_API_URL = process.env.NEXT_PUBLIC_VERCEL_URL + '/api';
   const defaultValues = {
     theme: 'indigo',
     title: 'Niouz',
