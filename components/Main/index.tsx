@@ -5,15 +5,15 @@ import { TextInput } from './TextInput';
 import { ThemeComboBox } from './ThemeComboBox';
 
 export function Main() {
-  const BASE_PATH = 'https://og.anuragroy.dev';
+  const BASE_PATH = 'http://localhost:3003' //'https://og.niouz.app';
   const BASE_IMAGE_API_URL = BASE_PATH + '/api';
 
   const defaultValues = {
-    theme: 'rose',
-    title: 'Dynamic OG Images using @vercel/og',
+    theme: 'indigo',
+    title: 'Niouz',
     description:
-      "Taking a look at Vercel's new library to generate dynamic OpenGraph images on the fly.",
-    logo: '🐦',
+      "Decocratizing news for all Haitians through radical innovation with technology",
+    logo: 'niouz.app',
   };
 
   const initialImageUrl = `${BASE_IMAGE_API_URL}?${new URLSearchParams(

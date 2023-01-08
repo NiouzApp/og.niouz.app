@@ -16,11 +16,11 @@ const getAloeVera = fetch(
 ).then((res) => res.arrayBuffer());
 
 export default async function handler(req: NextRequest) {
-  const DEFAULT_TITLE = 'Anurag Roy';
+  const DEFAULT_TITLE = 'Niouz';
   const DEFAULT_DESCRIPTION =
-    'Full-stack developer and aspiring designer from Kolkata, India.';
-  const DEFAULT_AVATAR = 'https://og.anuragroy.dev/memoji.png';
-  const DEFAULT_AUTHOR = 'anuragroy.dev';
+    'Democratizing news for all Haitians';
+  const LOGO = 'https://legacy.niouz.app/favicon/niouz.png';
+  const DEFAULT_AUTHOR = 'niouz.app';
   const DEFAULT_THEME = 'rose';
 
   const [satoshi, clashDisplay, aloeVera] = await Promise.all([
@@ -30,40 +30,32 @@ export default async function handler(req: NextRequest) {
   ]);
 
   const { searchParams } = req.nextUrl;
+  const get = (key: string, fallback: string | null = null): string | null => {
+    if (!searchParams.has(key)) return fallback;
+    return searchParams.get(key)!!.replaceAll('+', ' ');
+  } 
+
 
   // get content from query params
-  const title = searchParams.has('title')
-    ? searchParams.get('title')
-    : DEFAULT_TITLE;
+  const title = get('title', DEFAULT_TITLE)
+  const description = get('description', DEFAULT_DESCRIPTION)
+  const avatar = get('avatar', '🇭🇹')
+  const author = get('author', DEFAULT_AUTHOR)
+  const theme = get('theme', DEFAULT_THEME)
+  const logo = get('logo', LOGO)
 
-  const description = searchParams.has('description')
-    ? searchParams.get('description')
-    : DEFAULT_DESCRIPTION;
-
-  const avatar = searchParams.has('avatar')
-    ? searchParams.get('avatar')!
-    : DEFAULT_AVATAR;
-
-  const author = searchParams.has('author')
-    ? searchParams.get('author')
-    : DEFAULT_AUTHOR;
-
-  const logo = searchParams.has('logo') ? searchParams.get('logo') : null;
-
-  const theme = searchParams.has('theme')
-    ? searchParams.get('theme')
-    : DEFAULT_THEME;
+  console.log({ title, description, avatar, author, logo })
 
   return new ImageResponse(
     (
       <div
-        tw={`h-full w-full px-20 py-16 bg-${theme}-200 flex flex-col justify-between`}
+        tw={`h-full w-full px-20 py-16 bg-${theme}-700 flex flex-col justify-between`}
       >
-        <h1 tw="text-8xl leading-none" style={{ fontFamily: 'ClashDisplay' }}>
+        <h1 tw={`text-8xl text-${theme}-100 leading-none`} style={{ fontFamily: 'ClashDisplay' }}>
           {title}
         </h1>
         <p
-          tw="mb-16 text-5xl text-gray-900 leading-tight"
+          tw={`mb-16 text-5xl text-${theme}-300 leading-tight`}
           style={{ fontFamily: 'Satoshi' }}
         >
           {description}
@@ -78,15 +70,15 @@ export default async function handler(req: NextRequest) {
             <span tw="mr-4 text-5xl">{avatar}</span>
           )}
           <span
-            tw={`text-5xl text-${theme}-600 mr-auto`}
+            tw={`text-5xl text-${theme}-200 mr-auto`}
             style={{ fontFamily: 'AloeVera' }}
           >
             {author}
           </span>
           {logo?.startsWith('http') ? (
-            <img src={logo} tw="h-14 w-14" />
+            <img src={logo} tw="h-14 w-14 rounded-full" />
           ) : (
-            <span tw="text-5xl">{logo}</span>
+            <span tw={`text-5xl text-${theme}-200`}>{logo}</span>
           )}
         </div>
       </div>

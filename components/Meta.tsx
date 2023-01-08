@@ -1,12 +1,12 @@
 import Head from 'next/head';
 
 export function Meta() {
-  const siteUrl = 'https://og.anuragroy.dev';
+  const siteUrl = 'https://og.niouz.app';
   const title =
-    'og.anuragroy.dev - OpenGraph Image Generator for anuragroy.dev';
+    'Niouz.app';
   const description =
-    'Generate dynamic OpenGraph images on the edge using @vercel/og and Vercel Edge functions.';
-  const ogImageLink = 'https://og.anuragroy.dev/og.png';
+    'Democratizing news for all Haitians through radical innovations with technology';
+  const ogImageLink = 'https://legacy.niouz.app/favicon/niouz.png';
 
   return (
     <Head>
